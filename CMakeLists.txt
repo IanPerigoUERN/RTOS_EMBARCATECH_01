@@ -28,7 +28,7 @@ set(PICO_BOARD pico_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(blink C CXX ASM)
+project(joystick_direction C CXX ASM)
 
 # Pull in FreeRTOS
 
@@ -39,22 +39,29 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(blink
-    blink.c
+add_executable(joystick_direction
+    joystick_direction.c
+    inc_joystick/joystick_lib.c
+    inc_OLED/ssd1306.c
     )
 
 # pull in common dependencies
-target_link_libraries(blink pico_stdlib)
+target_link_libraries(joystick_direction pico_stdlib)
 
-target_include_directories(blink PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(joystick_direction PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
-target_link_libraries(blink pico_stdlib FreeRTOS-Kernel FreeRTOS-Kernel-Heap4)
+target_link_libraries(joystick_direction pico_stdlib 
+    FreeRTOS-Kernel 
+    FreeRTOS-Kernel-Heap4
+    hardware_adc
+    hardware_i2c
+    )
 
 if (PICO_CYW43_SUPPORTED)
-    target_link_libraries(blink pico_cyw43_arch_none)
+    target_link_libraries(joystick_direction pico_cyw43_arch_none)
 endif()
 
 # create map/bin/hex file etc.
-pico_add_extra_outputs(blink)
+pico_add_extra_outputs(joystick_direction)
 
 # add url via pico_set_program_url
