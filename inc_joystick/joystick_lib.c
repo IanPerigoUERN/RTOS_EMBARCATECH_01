@@ -5,7 +5,7 @@
 
 // Inicializa o joystick configurando o ADC (Conversor Analógico-Digital)
 void joystick_init(){
-    adc_init(); // Inicializa o ADC para permitir leituras analógicas
+    adc_init();
     adc_gpio_init(26); // Configura o pino GPIO 26 como entrada ADC Y
     adc_gpio_init(27); // Configura o pino GPIO 27 como entrada ADC X
 
