@@ -38,7 +38,7 @@ void vShowLastJoystickDirection()
             show_direction_of_joystick(&disp, "Direita");
         }
 
-        vTaskDelay(pdMS_TO_TICKS(300)); 
+        vTaskDelay(pdMS_TO_TICKS(100)); 
         
     }
 }
