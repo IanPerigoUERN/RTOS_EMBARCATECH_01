@@ -1,7 +1,7 @@
 #ifndef _BLINK_H
 #define _BLINK_H
 
-#include "library.h"
+#include "../Library.h"
 
 #define led_pin_blue 12
 

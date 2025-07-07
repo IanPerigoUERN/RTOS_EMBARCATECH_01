@@ -6,8 +6,9 @@ void vTemperatureUpdate(void *pvParameters) {
     float volt;
     float temperature;
     // Aguarda a conexão USB antes de imprimir
-    
-
+    while (!stdio_usb_connected()) {
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
     while (1) {
         adc_select_input(sensor_temp); // Canal 4 é o sensor de temperatura interno
         uint16_t adc_value = adc_read();
